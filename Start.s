@@ -7,19 +7,13 @@
 _start:
 	ldr sp,=4096 @use C function,so need stack
 	bl disable_watchdog
-@bl memsetup
-	bl memctl_setup
+	bl memsetup
+@bl memctl_setup
 	bl copy_2th_to_ram
 	bl create_page_table
 	bl mmu_init
 	ldr sp,=0xB4000000
-@ldr sp,=0x34000000
 	ldr pc,=0xB0004000
-@ldr pc,=0x30004000
-@ldr pc,=on_sdram
-@on_sdram:
-@ldr sp,=0x34000000
-@bl main
 halt_loop:
 	b halt_loop
 memctl_setup:
